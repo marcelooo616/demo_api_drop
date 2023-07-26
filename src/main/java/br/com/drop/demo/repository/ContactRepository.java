@@ -1,7 +1,7 @@
 package br.com.drop.demo.repository;
 
 
-import drop.model.entities.Contacts;
+import br.com.drop.demo.model.entities.Contacts;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
