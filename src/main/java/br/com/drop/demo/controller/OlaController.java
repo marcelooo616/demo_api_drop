@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ola")
+@RequestMapping("/api/usuario")
 public class OlaController {
 
 
 
-    @GetMapping
+    @GetMapping("/login")
     public String olaMundo(){
         return "ola mundo";
     }
