@@ -21,6 +21,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
+
 import javax.validation.Valid;
 import java.util.List;
 
@@ -47,6 +51,22 @@ public class UserController {
 
     }
 
+    public static boolean isUserAdmin(Collection<? extends GrantedAuthority> authorities) {
+        boolean hasUserRole = false;
+        boolean hasAdminRole = false;
+
+        for (GrantedAuthority authority : authorities) {
+            if (authority.getAuthority().equals("ROLE_USER")) {
+                hasUserRole = true;
+            } else if (authority.getAuthority().equals("ROLE_ADMIN")) {
+                hasAdminRole = true;
+            }
+        }
+
+        // Verifica se o usuário tem as duas roles, "ROLE_USER" e "ROLE_ADMIN"
+        return hasUserRole && hasAdminRole;
+    }
+
 
     @PostMapping("/auth")
     public TokenDTO authenticateUser(@RequestBody CredenciaisDTO credenciaisDTO){
@@ -64,10 +84,13 @@ public class UserController {
 
 
 
+            Collection<? extends GrantedAuthority> authorities = authenticatedUser.getAuthorities();
+            boolean isAdmin = isUserAdmin(authorities);
 
             String token = jwtService.gerarToken(usuario);
 
-            return new TokenDTO(usuario,token);
+
+            return new TokenDTO(usuario.getEmail(),token,isAdmin );
 
         }catch (UsernameNotFoundException | SenhaInvalidaException e){
 

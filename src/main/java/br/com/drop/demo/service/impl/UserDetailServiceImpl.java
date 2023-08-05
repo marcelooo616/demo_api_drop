@@ -183,10 +183,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
         System.out.println(Arrays.toString(roles));
 
         boolean usuarioAtivo = usuario.is_active_user();
+        boolean is_adm = usuario.isAdmin();
         return User
                 .builder()
                 .username(usuario.getEmail())
                 .password(usuario.getPassword())
+                .accountLocked(usuario.isAdmin())
                 .roles(roles)
                 .disabled(!usuarioAtivo)
                 .build();

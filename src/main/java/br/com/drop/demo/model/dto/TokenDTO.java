@@ -1,6 +1,5 @@
 package br.com.drop.demo.model.dto;
 
-import br.com.drop.demo.model.entities.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TokenDTO {
 
-    Usuario usuario;
+    private String email;
     private String token;
+    boolean isAdmin;
 
 }
