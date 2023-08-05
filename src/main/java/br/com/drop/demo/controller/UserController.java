@@ -67,7 +67,7 @@ public class UserController {
 
             String token = jwtService.gerarToken(usuario);
 
-            return new TokenDTO(usuario.getEmail(),token, usuario.isAdmin());
+            return new TokenDTO(usuario,token);
 
         }catch (UsernameNotFoundException | SenhaInvalidaException e){
 
