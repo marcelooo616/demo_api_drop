@@ -30,7 +30,7 @@ public class JwtService {
         Date data = Date.from(dadaHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant());
 
         String active = usuario.is_active_user() ? "false" : "true";
-        String isAdmin = usuario.isAdmin() ? "false" : "true";
+        String isAdmin = usuario.isAdmin() ? "true" : "false";
 
         return Jwts.builder()
                 .setIssuer("drop_api") // Emitente do token
