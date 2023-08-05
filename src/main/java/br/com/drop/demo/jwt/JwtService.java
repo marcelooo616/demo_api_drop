@@ -36,7 +36,7 @@ public class JwtService {
                 .setIssuer("drop_api") // Emitente do token
                 .setSubject(usuario.getEmail())
                 .claim("is_active", active)
-                .claim("is_admin", isAdmin)
+                .claim("is_admin", usuario.isAdmin())
                 .setIssuedAt(new Date()) // Data de emissão do token
                 .setExpiration(data)
                 .signWith(SignatureAlgorithm.HS512, chaveAssinada)
