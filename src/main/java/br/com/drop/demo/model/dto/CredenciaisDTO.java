@@ -11,4 +11,5 @@ public class CredenciaisDTO {
     private String email;
     private String password;
 
+
 }

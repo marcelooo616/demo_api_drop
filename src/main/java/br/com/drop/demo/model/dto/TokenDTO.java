@@ -11,4 +11,5 @@ public class TokenDTO {
 
     private String email;
     private String token;
+    private boolean idAdmin;
 }
