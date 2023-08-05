@@ -30,11 +30,13 @@ public class JwtService {
         Date data = Date.from(dadaHoraExpiracao.atZone(ZoneId.systemDefault()).toInstant());
 
         String active = usuario.is_active_user() ? "false" : "true";
+        String isAdmin = usuario.isAdmin() ? "false" : "true";
 
         return Jwts.builder()
                 .setIssuer("drop_api") // Emitente do token
                 .setSubject(usuario.getEmail())
                 .claim("is_active", active)
+                .claim("is_admin", isAdmin)
                 .setIssuedAt(new Date()) // Data de emissão do token
                 .setExpiration(data)
                 .signWith(SignatureAlgorithm.HS512, chaveAssinada)
